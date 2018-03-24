@@ -1,7 +1,8 @@
 #include <iostream>
-#include "BSTtree.cpp"
+#include "extra.h"
 using namespace std;
 using namespace BSTree;
+
 const int a=15;
 
 
@@ -14,29 +15,62 @@ void choice(){
     cout<<"6. Загрузить дерево из файла"<<endl;
     cout<<"7. Проверить наличие узла"<<endl;
     cout<<"8. Завершить работу программы"<<endl;
-
 };
 
+bool endPr(){
+    string ch;
+    while (1){
+        cout<<"Вы уверены, что хотите выйти из программы ? (да|нет) (yes|no)";
+        cin >> ch;
+        if ((ch =="yes") || (ch=="да")) {
+            return true;
+        }
+        else {
+            if ((ch == "no") || (ch=="нет") )
+                return false;
+        }
+    }
+}
+
 int main() {
-    int b,c;
+    int ch1=0;
     int arr[a];
-    for (int i=0 ; i<a; i++){
-        cin>>b;
-        arr[i]=b;
+    for (int i=0;i<a;i++){
+        cin>>arr[a];
     }
     Tree *tr=new Tree;
-    for ( int i=0 ;i<c ;i++){
+    for ( int i=0 ;i<a ;i++){
         tr->insert(arr[i]) ;
     }
     int ch=0;
+    delete tr;
     while (1) {
         choice();
         cin>>ch;
         switch(ch){
             case 1:
+                tr->print();
                 break;
             case 2:
-                break;
+                    cout << "a. Прямой обход"<< endl;
+                    cout << "b. Поперечный обход" << endl;
+                    cout << "c. Обратный обход" << endl;
+                    cin >> ch1;
+                    switch (ch1) {
+                        case 'a':
+                            tr->direct();
+                            cout << endl;
+                            break;
+                        case 'b':
+                            tr->simmetric();
+                            cout << endl;
+                            break;
+                        case 'c':
+                            tr->back();
+                            cout << endl;
+                            break;
+                    }
+                    break;
             case 3:
                 break;
             case 4:
@@ -48,9 +82,14 @@ int main() {
             case 7:
                 break;
             case 8:
-                return 0;
+                if (endPr()) {
+                    tr->~Tree();
+                    return 0;
+                }
+                else
+                    continue ;
+
         }
     }
-    delete tr;
     return 0;
 }
