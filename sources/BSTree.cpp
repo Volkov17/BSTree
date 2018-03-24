@@ -31,29 +31,64 @@ bool Tree::insert(int value) {
 
     }
 }
-void Tree::printEl ( Node *node ,int a) {
+void Tree::printEl ( Node *node ,int ch) {
 
     if (node == nullptr) {
         cout << "Tree is empty" << endl;
     } else {
         if (node->right != nullptr)
-            printEl(node->right, a + 1);
-        for (int i = 0; i < a; i++) {
+            printEl(node->right, ch + 1);
+        for (int i = 0; i < ch; i++) {
             cout << "   ";
         }
         if ((node->data) != (root->data))
             cout << "-";
         cout << node->data << endl;
         if (node->left != nullptr)
-            printEl(node->left, a + 1);
+            printEl(node->left, ch + 1);
     }
+}
+
+void Tree::SimmetricGo(Node* node) {
+    if (node) {
+        SimmetricGo(node->left);
+        cout<< node->data;
+        SimmetricGo(node->right);
+    }
+}
+
+void Tree::simmetric()  {
+    SimmetricGo(root);
+}
+
+
+void Tree::DirectGo(Node* node) {
+    if (node) {
+        cout<<node->data;
+        DirectGo(node->left);
+        DirectGo(node->right);
+    }
+}
+void Tree::direct()  {
+    DirectGo(root);
+}
+
+void Tree::BackGo(Node* node) {
+    if (node) {
+        BackGo(node->left);
+        BackGo(node->right);
+        cout << node->data;
+    }
+}
+void Tree::back()  {
+    BackGo(root);
 }
 
 void Tree::print() {
     printEl(root, 0);
 }
 
-void destroyTree ( Node *&node){
+void Tree::destroyTree ( Node *node){
     if(node) {
         destroyTree(node->left);
         destroyTree(node->right);
@@ -65,4 +100,5 @@ void destroyTree ( Node *&node){
 Tree::~Tree(){
     destroyTree(root);
 };
+
 
