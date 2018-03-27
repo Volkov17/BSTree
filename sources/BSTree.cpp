@@ -12,25 +12,30 @@ bool Tree::insert(int value) {
     }
     Node *current = root;
     while (1) {
-        if (value > (current->data) && current->right != nullptr)
+        if (value > (current->data) && current->right != nullptr){
             current = current->right;
+            continue;
+        }
         else {
-            if (value > (current->data) && ((current->right) = nullptr)) {
-                current = new Node{value, nullptr, nullptr};
+            if (value > (current->data) && ((current->right) == nullptr)) {
+                current->right = new Node{value, nullptr, nullptr};
                 return true;
             }
         }
-        if (value < (current->data) && current->left != nullptr)
+        if (value < (current->data) && current->left != nullptr){
             current = current->left;
+            continue;
+        }
         else {
-            if (value < (current->data) && ((current->left) = nullptr)) {
-                current = new Node{value, nullptr, nullptr};
+            if (value < (current->data) && ((current->left) == nullptr)) {
+                current->left = new Node{value, nullptr, nullptr};
                 return true;
             }
         }
-
     }
+
 }
+
 void Tree::printEl ( Node *node ,int ch) {
 
     if (node == nullptr) {
@@ -52,7 +57,7 @@ void Tree::printEl ( Node *node ,int ch) {
 void Tree::SimmetricGo(Node* node) {
     if (node) {
         SimmetricGo(node->left);
-        cout<< node->data;
+        cout<< node->data<<' ';
         SimmetricGo(node->right);
     }
 }
@@ -64,7 +69,7 @@ void Tree::simmetric()  {
 
 void Tree::DirectGo(Node* node) {
     if (node) {
-        cout<<node->data;
+        cout<<node->data<<' ';
         DirectGo(node->left);
         DirectGo(node->right);
     }
@@ -77,7 +82,7 @@ void Tree::BackGo(Node* node) {
     if (node) {
         BackGo(node->left);
         BackGo(node->right);
-        cout << node->data;
+        cout << node->data<<' ';
     }
 }
 void Tree::back()  {
