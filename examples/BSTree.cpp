@@ -3,7 +3,7 @@
 using namespace std;
 using namespace BSTree;
 
-const int a=15;
+const int a=11;
 
 
 void choice(){
@@ -36,14 +36,13 @@ int main() {
     int ch1=0;
     int arr[a];
     for (int i=0;i<a;i++){
-        cin>>arr[a];
+        cin>>arr[i];
     }
     Tree *tr=new Tree;
     for ( int i=0 ;i<a ;i++){
         tr->insert(arr[i]) ;
     }
     int ch=0;
-    delete tr;
     while (1) {
         choice();
         cin>>ch;
@@ -52,22 +51,22 @@ int main() {
                 tr->print();
                 break;
             case 2:
-                    cout << "a. Прямой обход"<< endl;
-                    cout << "b. Поперечный обход" << endl;
-                    cout << "c. Обратный обход" << endl;
+                    cout << "1. Прямой обход"<< endl;
+                    cout << "2. Поперечный обход" << endl;
+                    cout << "3. Обратный обход" << endl;
                     cin >> ch1;
                     switch (ch1) {
-                        case 'a':
+                        case 1:
                             tr->direct();
-                            cout << endl;
+                            cout<<endl;
                             break;
-                        case 'b':
+                        case 2:
                             tr->simmetric();
-                            cout << endl;
+                            cout<<endl;
                             break;
-                        case 'c':
+                        case 3:
                             tr->back();
-                            cout << endl;
+                            cout<<endl;
                             break;
                     }
                     break;
@@ -91,5 +90,6 @@ int main() {
 
         }
     }
+    delete tr;
     return 0;
 }
