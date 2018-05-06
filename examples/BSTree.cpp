@@ -1,9 +1,8 @@
 #include <iostream>
 #include "extra.h"
+#include <fstream>
 using namespace std;
 using namespace BSTree;
-
-const int a=11;
 
 
 void choice(){
@@ -31,24 +30,25 @@ bool endPr(){
         }
     }
 }
-
-int main() {
+ const int g=11;
+int main(int argc, char* argv[]) {
     int ch1=0;
-    int arr[a];
-    for (int i=0;i<a;i++){
+    int arr[g];
+    for (int i=0;i<g;i++){
         cin>>arr[i];
     }
-    Tree *tr=new Tree;
-    for ( int i=0 ;i<a ;i++){
-        tr->insert(arr[i]) ;
+    Tree tr;
+    for ( int i=0 ;i<g ;i++){
+        tr.insert(arr[i]) ;
     }
     int ch=0;
-    while (1) {
+    bool is_done=false;
+    while (!is_done) {
         choice();
         cin>>ch;
         switch(ch){
             case 1:
-                tr->print();
+                tr.print();
                 break;
             case 2:
                     cout << "1. Прямой обход"<< endl;
@@ -57,39 +57,53 @@ int main() {
                     cin >> ch1;
                     switch (ch1) {
                         case 1:
-                            tr->direct();
+                            tr.direct();
                             cout<<endl;
                             break;
                         case 2:
-                            tr->simmetric();
+                            tr.simmetric();
                             cout<<endl;
                             break;
                         case 3:
-                            tr->back();
+                            tr.back();
                             cout<<endl;
                             break;
+                        default:
+                            cout << "Неизвестная команда";
                     }
                     break;
             case 3:
+                cout<<"введите число"<<endl;
+                int chislo;
+                cin>>chislo;
+                tr.insert(chislo);
                 break;
             case 4:
                 break;
             case 5:
+                tr.savetofile();
                 break;
             case 6:
+                tr.uploadfromfile();
                 break;
             case 7:
-                break;
-            case 8:
-                if (endPr()) {
-                    tr->~Tree();
-                    return 0;
-                }
+                cout<<"введите число"<<endl;
+                int n;
+                cin>>n;
+                if (tr.proverka_uzla(n))
+                    cout<<"такой элемент присутствует "<<endl;
                 else
-                    continue ;
-
+                    cout<<"элемент не найден"<<endl;
+                break;
+            case 8: {
+                if (endPr()) {
+                    is_done = true;
+                }
+                break;
+            }
+            default:
+                cout << "Неизвестная команда";
         }
     }
-    delete tr;
     return 0;
 }
