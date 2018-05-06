@@ -147,7 +147,7 @@ void Tree::fromfileEl(){
     File.open("BinTree.txt");
     for (int i=0; i<=countEL; i++) {
         File >> a;
-        this->insert (atoi( a.data()));
+        insert (atoi( a.data()));
     }
     File.close();
 }
