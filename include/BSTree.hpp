@@ -3,7 +3,6 @@ namespace BSTree {
         int data;
         Node *left;
         Node *right;
-//        Tree *p;
     };
 
     class Tree {
@@ -13,6 +12,9 @@ namespace BSTree {
         void DirectGo(Node* node);
         void SimmetricGo(Node* root);
         void BackGo(Node* root);
+        void infileEl(Node*root);
+        void fromfileEl();
+        void save_tree(std::ofstream &File,  Node * root,int  space);
     public:
         Tree();
         bool insert(int value);
@@ -20,6 +22,9 @@ namespace BSTree {
         void direct();
         void simmetric();
         void back();
+        void savetofile();
+        void uploadfromfile();
+        bool proverka_uzla(int n);
         ~Tree();
     };
 }
