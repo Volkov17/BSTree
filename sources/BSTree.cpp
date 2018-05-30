@@ -106,26 +106,20 @@ void Tree::destroyTree ( Node *node){
     node=nullptr;
 }
 
-void Tree::save_tree(ofstream &f, Node *node, int level)
-{
-    if (node!=nullptr) {
-        if (node->right!=nullptr)
-            save_tree (f,node->right, level+1);
-        for (int i=0; i< level; i++) {
-            f<< "   ";
-        }
-        if ((node->data)!=(root->data))
-            f<< "--";
-        f<< node->data << std::endl;
-        if (node->left!=nullptr)
-            save_tree (f,node->left, level+1);
+void Tree::save_tree(ofstream &f, Node *node){
+    if (node != nullptr) {
+        f << node->data << " ";
+        save_tree(f,node->right);
+        save_tree(f,node->left);
     }
 }
 
 void Tree::infileEl(Node*node){
     ofstream fout;
     fout.open("BinTree.txt");
-    save_tree(fout,node,0);
+    if(!fout.is_open() || root == nullptr)
+        cout << "error" << endl;
+    save_tree(fout,root);
 }
 
 void Tree::savetofile(){
@@ -136,22 +130,15 @@ void Tree::fromfileEl(){
     ifstream File("BinTree.txt");
     if (!File.is_open())
         cout<<"error";
-    string a;
-    getline (File,a);
-    int countEL=0;
-    for (int i=0; i< a.length(); i++) {
-        if (a[i]==' ')
-            countEL++;
+    if(root) {
+        destroyTree(root);
     }
-    File.close();
-    File.open("BinTree.txt");
-    for (int i=0; i<=countEL; i++) {
-        File >> a;
-        insert (atoi( a.data()));
+    int a;
+    root=nullptr;
+    while(File >> a) {
+        insert(a);
     }
-    File.close();
 }
-
 void Tree::uploadfromfile() {
     fromfileEl();
 }
@@ -173,4 +160,5 @@ bool Tree::proverka_uzla(int n){
 Tree::~Tree(){
     destroyTree(root);
 };
+
 
